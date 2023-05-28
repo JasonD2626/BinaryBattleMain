@@ -74,10 +74,9 @@ public class App implements ActionListener{
 
     public void switchPanels(String whichScreen)
     {
+        panel.removeAll();
         if (whichScreen.equals("gs"))
         {
-           panel.removeAll();
-
            frame.repaint();
         }
     }
