@@ -29,6 +29,7 @@ public class App implements ActionListener{
     public static JComboBox<ArrayList> myBox2;
     public static JButton playButton = new JButton("Start Game");
     public static JButton categoryOKButton = new JButton("Select");
+    public static JButton viewQButton = new JButton("View Question");
     public static JLabel questionType = new JLabel("Select question category: ");
     public static JLabel question = new JLabel("Select point value: ");
     
@@ -75,6 +76,10 @@ public class App implements ActionListener{
         categoryOKButton.setBounds(590, 280, 100, 20);
         categoryOKButton.setFont(new Font("Calibri", Font.BOLD, 10));
         categoryOKButton.addActionListener(new App());
+
+        viewQButton.setBounds(580, 480, 130, 50);
+        viewQButton.addActionListener(new App());
+        viewQButton.addActionListener(new App());
 
         
         playButton.setBounds(550, 350, 200, 100);
@@ -140,6 +145,10 @@ public class App implements ActionListener{
             }
             
         }
+        else if (e.getSource() == viewQButton)
+        {
+            switchPanels("qs");
+        }
     }
 
     public void switchPanels(String whichScreen)
@@ -153,12 +162,18 @@ public class App implements ActionListener{
             panel.add(myBox1);
             panel.add(categoryOKButton);
             panel.add(questionType);
+            panel.add(viewQButton);
             panel.add(question);
             panel.revalidate();
             panel.repaint();
             frame.repaint();
 
     
+        }
+        else if (whichScreen.equals("qs"))
+        {
+            panel.repaint();
+            frame.repaint();
         }
         
     }
