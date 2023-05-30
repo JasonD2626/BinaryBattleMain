@@ -1,5 +1,6 @@
 import java.awt.Button;
 import java.awt.Font;
+import java.awt.desktop.QuitStrategy;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,21 +18,23 @@ public class App implements ActionListener{
     public static JPanel panel = new JPanel();
     public static JFrame frame = new JFrame();
     public static JLabel title = new JLabel("BinaryBattle");
+
     public static JLabel teams = new JLabel("How many teams?");
     public static ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     public static ArrayList<String> questionTypes = new ArrayList<>(Arrays.asList("cat1", "cat2", "cat3", "cat4", "cat5"));
-    public static ArrayList<String> questions1 = new ArrayList<>(Arrays.asList("100", "200", "300", "400", "500"));
-    public static ArrayList<String> questions2 = new ArrayList<>(Arrays.asList("100", "200", "300", "400", "500"));
-    public static ArrayList<String> questions3 = new ArrayList<>(Arrays.asList("100", "200", "300", "400", "500"));
-    public static ArrayList<String> questions4 = new ArrayList<>(Arrays.asList("100", "200", "300", "400", "500"));
-    public static ArrayList<String> questions5 =new ArrayList<>(Arrays.asList("100", "200", "300", "400", "500"));
-    public static JComboBox<ArrayList> myBox1;
+    public static ArrayList<Integer> questions1 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questions2 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questions3 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questions4 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questions5 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static JComboBox<ArrayList> myBox1; 
     public static JComboBox<ArrayList> myBox2;
     public static JButton playButton = new JButton("Start Game");
     public static JButton categoryOKButton = new JButton("Select");
     public static JButton viewQButton = new JButton("View Question");
     public static JLabel questionType = new JLabel("Select question category: ");
     public static JLabel question = new JLabel("Select point value: ");
+
     
 
     public static void main(String[] args) throws Exception {
@@ -62,8 +65,10 @@ public class App implements ActionListener{
         questionType.setBounds(500, -120, 8000, 600);
         questionType.setFont(new Font("Calibri", Font.BOLD, 30));
 
+        
         question.setBounds(530, 50, 8000, 600);
         question.setFont(new Font("Calibri", Font.BOLD, 30));
+
 
         myBox2 = new JComboBox();
         myBox2.setBounds(570, 380, 150, 50);
@@ -147,6 +152,7 @@ public class App implements ActionListener{
         }
         else if (e.getSource() == viewQButton)
         {
+
             switchPanels("qs");
         }
     }
@@ -172,17 +178,130 @@ public class App implements ActionListener{
         }
         else if (whichScreen.equals("qs"))
         {
+            setQuestions(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
             panel.repaint();
             frame.repaint();
         }
         
     }
 
-    public void setQuestions(String whichQuestion)
+    public void setQuestions(String questionCat, int pointVal)
     {
-        if (whichQuestion.equals("a"))
+        if (questionCat.equals("cat1"))
         {
-            myBox1.removeAllItems();
+            if (pointVal == 100)
+            {
+
+            }
+            else if (pointVal == 200)
+            {
+
+            }
+            else if (pointVal == 300)
+            {
+
+            }
+            else if (pointVal == 400)
+            {
+                
+            }
+            else if (pointVal == 500)
+            {
+                
+            }
+
+        }
+        else if (questionCat.equals("cat2"))
+        {
+            if (pointVal == 100)
+            {
+
+            }
+            else if (pointVal == 200)
+            {
+
+            }
+            else if (pointVal == 300)
+            {
+
+            }
+            else if (pointVal == 400)
+            {
+                
+            }
+            else if (pointVal == 500)
+            {
+                
+            }
+        }
+        else if (questionCat.equals("cat3"))
+        {
+            if (pointVal == 100)
+            {
+
+            }
+            else if (pointVal == 200)
+            {
+
+            }
+            else if (pointVal == 300)
+            {
+
+            }
+            else if (pointVal == 400)
+            {
+                
+            }
+            else if (pointVal == 500)
+            {
+                
+            }
+        }
+        else if (questionCat.equals("cat4"))
+        {
+            if (pointVal == 100)
+            {
+
+            }
+            else if (pointVal == 200)
+            {
+
+            }
+            else if (pointVal == 300)
+            {
+
+            }
+            else if (pointVal == 400)
+            {
+                
+            }
+            else if (pointVal == 500)
+            {
+                
+            }
+        }
+        else if (questionCat.equals("cat5"))
+        {
+            if (pointVal == 100)
+            {
+
+            }
+            else if (pointVal == 200)
+            {
+
+            }
+            else if (pointVal == 300)
+            {
+
+            }
+            else if (pointVal == 400)
+            {
+                
+            }
+            else if (pointVal == 500)
+            {
+                
+            }
         }
     }
 
