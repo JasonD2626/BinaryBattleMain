@@ -18,7 +18,7 @@ public class App implements ActionListener{
     public static JPanel panel = new JPanel();
     public static JFrame frame = new JFrame();
     public static JLabel title = new JLabel("BinaryBattle");
-
+    public static String teamString = "";
     public static JLabel teams = new JLabel("How many teams?");
     public static ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     public static ArrayList<String> questionTypes = new ArrayList<>(Arrays.asList("cat1", "cat2", "cat3", "cat4", "cat5"));
@@ -27,17 +27,25 @@ public class App implements ActionListener{
     public static ArrayList<Integer> questions3 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
     public static ArrayList<Integer> questions4 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
     public static ArrayList<Integer> questions5 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<String> teamsList = new ArrayList<>();
+    public static ArrayList<Integer> teamScores = new ArrayList<>();
+    public static JLabel teamsDisplay = new JLabel("");
     public static JComboBox<ArrayList> myBox1; 
     public static JComboBox<ArrayList> myBox2;
+    public static JComboBox<ArrayList> myBox3;
     public static JButton playButton = new JButton("Start Game");
     public static JButton categoryOKButton = new JButton("Select");
     public static JButton viewQButton = new JButton("View Question");
+    public static JLabel selectTeam = new JLabel("Which team?: ");
     public static JLabel questionType = new JLabel("Select question category: ");
     public static JLabel question = new JLabel("Select point value: ");
 
     
 
     public static void main(String[] args) throws Exception {
+
+
+
 
                 
         
@@ -62,6 +70,9 @@ public class App implements ActionListener{
         teams.setFont(new Font("Calibri", Font.BOLD, 20));
         panel.add(teams);
 
+        selectTeam.setBounds(550, -270, 8000, 600);
+        selectTeam.setFont(new Font("Calibri", Font.BOLD, 30));
+
         questionType.setBounds(500, -120, 8000, 600);
         questionType.setFont(new Font("Calibri", Font.BOLD, 30));
 
@@ -69,6 +80,14 @@ public class App implements ActionListener{
         question.setBounds(530, 50, 8000, 600);
         question.setFont(new Font("Calibri", Font.BOLD, 30));
 
+                        
+        teamsDisplay.setBounds(580, 210, 8000, 600);
+        teamsDisplay.setFont(new Font("Calibri", Font.BOLD, 15));
+
+        
+
+        myBox3 = new JComboBox();
+        myBox3.setBounds(570, 50, 150, 50);
 
         myBox2 = new JComboBox();
         myBox2.setBounds(570, 380, 150, 50);
@@ -104,6 +123,21 @@ public class App implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playButton)
         {
+            for (int i = 1; i <= (int)myBox1.getSelectedItem(); i++)
+            {
+                teamsList.add("Team " + i);
+            }
+
+            for (int i = 1; i <= (int)myBox1.getSelectedItem(); i++)
+            {
+                teamScores.add(0);
+            }
+
+            System.out.println(teamsList);
+            System.out.println(teamScores);
+
+            myBox3.setModel(new JComboBox(teamsList.toArray()).getModel());
+
             switchPanels("gs");
         }
         else if (e.getSource() == categoryOKButton)
@@ -166,6 +200,8 @@ public class App implements ActionListener{
             myBox1.setModel(new JComboBox(questionTypes.toArray()).getModel());
             panel.add(myBox2);
             panel.add(myBox1);
+            panel.add(myBox3);
+            panel.add(selectTeam);
             panel.add(categoryOKButton);
             panel.add(questionType);
             panel.add(viewQButton);
@@ -179,6 +215,14 @@ public class App implements ActionListener{
         else if (whichScreen.equals("qs"))
         {
             setQuestions(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
+            for (int i = 0; i < teamsList.size(); i++)
+            {
+                teamString += teamsList.get(i);
+                System.out.println(i);
+            }
+            System.out.println(teamString);
+            teamsDisplay.setText(teamString);
+            panel.add(teamsDisplay);
             panel.repaint();
             frame.repaint();
         }
