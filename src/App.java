@@ -18,7 +18,7 @@ public class App implements ActionListener{
     public static JPanel panel = new JPanel();
     public static JFrame frame = new JFrame();
     public static JLabel title = new JLabel("BinaryBattle");
-    public static String teamString = "";
+    public static String teamString = "Team 1: ";
     public static JLabel teams = new JLabel("How many teams?");
     public static ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     public static ArrayList<String> questionTypes = new ArrayList<>(Arrays.asList("cat1", "cat2", "cat3", "cat4", "cat5"));
@@ -127,14 +127,15 @@ public class App implements ActionListener{
             {
                 teamsList.add("Team " + i);
             }
+            System.out.println(teamsList);
+
 
             for (int i = 1; i <= (int)myBox1.getSelectedItem(); i++)
             {
                 teamScores.add(0);
             }
 
-            System.out.println(teamsList);
-            System.out.println(teamScores);
+            
 
             myBox3.setModel(new JComboBox(teamsList.toArray()).getModel());
 
@@ -215,14 +216,21 @@ public class App implements ActionListener{
         else if (whichScreen.equals("qs"))
         {
             setQuestions(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
-            for (int i = 0; i < teamsList.size(); i++)
-            {
-                teamString += teamsList.get(i);
-                System.out.println(i);
-            }
-            System.out.println(teamString);
             teamsDisplay.setText(teamString);
             panel.add(teamsDisplay);
+            panel.repaint();
+            frame.repaint();
+            for (int i = 0; i < teamsList.size(); i++)
+            {
+                if (i == 0)
+                {
+                    teamString += teamScores.get(i) + " || ";
+                }
+                else if (i < 0 || teamsList.size() > 1)
+                {
+                    teamString += " " + teamsList.get(i) + ": " + teamScores.get(i) + " || ";
+                }
+            }
             panel.repaint();
             frame.repaint();
         }
