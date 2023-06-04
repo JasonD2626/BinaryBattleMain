@@ -1,18 +1,5 @@
-## Getting Started
+BinaryBattle is a jeopardy-based game created entirely in Swing, with over 30 uniquely-created Java-based questions.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+As part of the the DetroitHacks 2023 event, I was able to program the application over the course of around ~2 weeks, with a one week planning period preceding it.
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Enjoy playing!
