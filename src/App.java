@@ -21,12 +21,12 @@ public class App implements ActionListener{
     public static String teamString = "Team 1: ";
     public static JLabel teams = new JLabel("How many teams?");
     public static ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    public static ArrayList<String> questionTypes = new ArrayList<>(Arrays.asList("cat1", "cat2", "cat3", "cat4", "cat5"));
-    public static ArrayList<Integer> questions1 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
-    public static ArrayList<Integer> questions2 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
-    public static ArrayList<Integer> questions3 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
-    public static ArrayList<Integer> questions4 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
-    public static ArrayList<Integer> questions5 = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<String> questionTypes = new ArrayList<>(Arrays.asList("Arrays, ArrayLists, and 2D Arrays", "Conditionals", "Inheritance", "Loops", "Random"));
+    public static ArrayList<Integer> questionsArrays = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questionsCond = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questionsInheritance = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questionsLoops = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
+    public static ArrayList<Integer> questionsRandom = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
     public static ArrayList<String> teamsList = new ArrayList<>();
     public static ArrayList<Integer> teamScores = new ArrayList<>();
     public static JLabel teamsDisplay = new JLabel("");
@@ -94,7 +94,7 @@ public class App implements ActionListener{
 
 
         myBox1 = new JComboBox(numbers.toArray());
-        myBox1.setBounds(570, 220, 150, 50);;
+        myBox1.setBounds(550, 220, 200, 50);;
         panel.add(myBox1);
 
         categoryOKButton.setBounds(590, 280, 100, 20);
@@ -143,42 +143,42 @@ public class App implements ActionListener{
         }
         else if (e.getSource() == categoryOKButton)
         {
-            if(((String)myBox1.getSelectedItem()).equals("cat1"))
+            if(((String)myBox1.getSelectedItem()).equals("Arrays, ArrayLists, and 2D Arrays"))
             {
               myBox2.removeAllItems();
-              myBox2.setModel(new JComboBox(questions1.toArray()).getModel());
+              myBox2.setModel(new JComboBox(questionsArrays.toArray()).getModel());
               panel.revalidate();
               panel.repaint();
               frame.repaint();
             }
-            else if(((String)myBox1.getSelectedItem()).equals("cat2"))
+            else if(((String)myBox1.getSelectedItem()).equals("Conditionals"))
             {
               myBox2.removeAllItems();
-              myBox2.setModel(new JComboBox(questions2.toArray()).getModel());
+              myBox2.setModel(new JComboBox(questionsCond.toArray()).getModel());
               panel.revalidate();
               panel.repaint();
               frame.repaint();
             }
-            else if(((String)myBox1.getSelectedItem()).equals("cat3"))
+            else if(((String)myBox1.getSelectedItem()).equals("Inheritance"))
             {
               myBox2.removeAllItems();
-              myBox2.setModel(new JComboBox(questions3.toArray()).getModel());
+              myBox2.setModel(new JComboBox(questionsInheritance.toArray()).getModel());
               panel.revalidate();
               panel.repaint();
               frame.repaint();
             }
-            else if(((String)myBox1.getSelectedItem()).equals("cat4"))
+            else if(((String)myBox1.getSelectedItem()).equals("Loops"))
             {
               myBox2.removeAllItems();
-              myBox2.setModel(new JComboBox(questions4.toArray()).getModel());
+              myBox2.setModel(new JComboBox(questionsLoops.toArray()).getModel());
               panel.revalidate();
               panel.repaint();
               frame.repaint();
             }
-            else if(((String)myBox1.getSelectedItem()).equals("cat5"))
+            else if(((String)myBox1.getSelectedItem()).equals("Random"))
             {
               myBox2.removeAllItems();
-              myBox2.setModel(new JComboBox(questions5.toArray()).getModel());
+              myBox2.setModel(new JComboBox(questionsRandom.toArray()).getModel());
               panel.revalidate();
               panel.repaint();
               frame.repaint();
@@ -239,7 +239,7 @@ public class App implements ActionListener{
 
     public void setQuestions(String questionCat, int pointVal)
     {
-        if (questionCat.equals("cat1"))
+        if (questionCat.equals("Arrays, ArrayLists, and 2D Arrays"))
         {
             if (pointVal == 100)
             {
@@ -263,7 +263,7 @@ public class App implements ActionListener{
             }
 
         }
-        else if (questionCat.equals("cat2"))
+        else if (questionCat.equals("Conditionals"))
         {
             if (pointVal == 100)
             {
@@ -286,7 +286,7 @@ public class App implements ActionListener{
                 
             }
         }
-        else if (questionCat.equals("cat3"))
+        else if (questionCat.equals("Inheritance"))
         {
             if (pointVal == 100)
             {
@@ -309,7 +309,7 @@ public class App implements ActionListener{
                 
             }
         }
-        else if (questionCat.equals("cat4"))
+        else if (questionCat.equals("Loops"))
         {
             if (pointVal == 100)
             {
@@ -332,7 +332,7 @@ public class App implements ActionListener{
                 
             }
         }
-        else if (questionCat.equals("cat5"))
+        else if (questionCat.equals("Random"))
         {
             if (pointVal == 100)
             {
