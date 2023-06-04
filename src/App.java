@@ -81,7 +81,7 @@ public class App implements ActionListener{
         question.setFont(new Font("Calibri", Font.BOLD, 30));
 
                         
-        teamsDisplay.setBounds(580, 210, 8000, 600);
+        teamsDisplay.setBounds(400, 210, 8000, 600);
         teamsDisplay.setFont(new Font("Calibri", Font.BOLD, 15));
 
         
@@ -226,7 +226,7 @@ public class App implements ActionListener{
                 {
                     teamString += teamScores.get(i) + " || ";
                 }
-                else if (i < 0 || teamsList.size() > 1)
+                else if (i > 0 && teamsList.size() > 1)
                 {
                     teamString += " " + teamsList.get(i) + ": " + teamScores.get(i) + " || ";
                 }
