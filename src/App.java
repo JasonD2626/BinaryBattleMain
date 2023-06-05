@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 import java.awt.desktop.QuitStrategy;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
@@ -19,6 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -48,6 +52,7 @@ public class App implements ActionListener{
     public static JButton playButton = new JButton("Start Game");
     public static JButton categoryOKButton = new JButton("Select");
     public static JButton viewQButton = new JButton("View Question");
+    public static JButton viewAButton = new JButton("View Answer");
     public static JLabel selectTeam = new JLabel("Which team?: ");
     public static JLabel questionType = new JLabel("Select question category: ");
     public static JLabel question = new JLabel("Select point value: ");
@@ -113,13 +118,17 @@ public class App implements ActionListener{
 
         viewQButton.setBounds(580, 480, 130, 50);
         viewQButton.addActionListener(new App());
-        viewQButton.addActionListener(new App());
+
+        viewAButton.setBounds(580, 480, 130, 50); //change bounds 
+        viewAButton.addActionListener(new App());
 
         
         playButton.setBounds(550, 350, 200, 100);
         playButton.setFont(new Font("Calibri", Font.BOLD, 30));
         playButton.addActionListener(new App());
         panel.add(playButton);
+
+      
 
         frame.add(panel);
         frame.setVisible(true);
@@ -201,6 +210,10 @@ public class App implements ActionListener{
 
             switchPanels("qs");
         }
+        else if (e.getSource() == viewAButton)
+        {
+            switchPanels("as");
+        }
     }
 
     public void switchPanels(String whichScreen)
@@ -218,19 +231,7 @@ public class App implements ActionListener{
             panel.add(questionType);
             panel.add(viewQButton);
             panel.add(question);
-            panel.revalidate();
-            panel.repaint();
-            frame.repaint();
-
-    
-        }
-        else if (whichScreen.equals("qs"))
-        {
-            setQuestions(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
-            teamsDisplay.setText(teamString);
             panel.add(teamsDisplay);
-            panel.repaint();
-            frame.repaint();
             for (int i = 0; i < teamsList.size(); i++)
             {
                 if (i == 0)
@@ -242,11 +243,45 @@ public class App implements ActionListener{
                     teamString += " " + teamsList.get(i) + ": " + teamScores.get(i) + " || ";
                 }
             }
+            panel.revalidate();
+            panel.repaint();
+            frame.repaint();
+
+    
+        }
+        else if (whichScreen.equals("qs"))
+        {
+            setQuestions(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
+            teamsDisplay.setText(teamString);
+            panel.add(viewAButton);
+            panel.repaint();
+            frame.repaint();
+            panel.add(teamsDisplay);
+            for (int i = 0; i < teamsList.size(); i++)
+            {
+                if (i == 0)
+                {
+                    teamString += teamScores.get(i) + " || ";
+                }
+                else if (i > 0 && teamsList.size() > 1)
+                {
+                    teamString += " " + teamsList.get(i) + ": " + teamScores.get(i) + " || ";
+                }
+            }
+            panel.revalidate();
+            panel.repaint();
+            frame.repaint();
+        }
+        else if (whichScreen.equals("as"))
+        {
+            setAnswers(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
+            panel.revalidate();
             panel.repaint();
             frame.repaint();
         }
         
     }
+
 
     public void setQuestions(String questionCat, int pointVal)
     {
@@ -260,6 +295,7 @@ public class App implements ActionListener{
                 panel.add(questionAndAnswer);
                 panel.repaint();
                 frame.repaint();
+            
             }
             else if (pointVal == 200)
             {
@@ -491,6 +527,10 @@ public class App implements ActionListener{
                 frame.repaint();
             }
         }
+    }
+
+    public void setAnswers(String questionCat, int pointVal) {
+
     }
 
 
