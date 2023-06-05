@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException; 
@@ -45,6 +44,7 @@ public class App implements ActionListener{
     public static ArrayList<Integer> questionsRandom = new ArrayList<>(Arrays.asList(100, 200, 300, 400, 500));
     public static ArrayList<String> teamsList = new ArrayList<>();
     public static ArrayList<Integer> teamScores = new ArrayList<>();
+    public static String whichArray; 
     public static JLabel teamsDisplay = new JLabel("");
     public static JComboBox<ArrayList> myBox1; 
     public static JComboBox<ArrayList> myBox2;
@@ -119,7 +119,7 @@ public class App implements ActionListener{
         viewQButton.setBounds(580, 480, 130, 50);
         viewQButton.addActionListener(new App());
 
-        viewAButton.setBounds(580, 480, 130, 50); //change bounds 
+        viewAButton.setBounds(580, 0, 2000, 600); //change bounds 
         viewAButton.addActionListener(new App());
 
         
@@ -147,7 +147,6 @@ public class App implements ActionListener{
             {
                 teamsList.add("Team " + i);
             }
-            System.out.println(teamsList);
 
 
             for (int i = 1; i <= (int)myBox1.getSelectedItem(); i++)
@@ -167,6 +166,7 @@ public class App implements ActionListener{
             {
               myBox2.removeAllItems();
               myBox2.setModel(new JComboBox(questionsArrays.toArray()).getModel());
+              whichArray = "qA";
               panel.revalidate();
               panel.repaint();
               frame.repaint();
@@ -175,6 +175,7 @@ public class App implements ActionListener{
             {
               myBox2.removeAllItems();
               myBox2.setModel(new JComboBox(questionsCond.toArray()).getModel());
+              whichArray = "qC";
               panel.revalidate();
               panel.repaint();
               frame.repaint();
@@ -183,6 +184,7 @@ public class App implements ActionListener{
             {
               myBox2.removeAllItems();
               myBox2.setModel(new JComboBox(questionsInheritance.toArray()).getModel());
+              whichArray = "qI";
               panel.revalidate();
               panel.repaint();
               frame.repaint();
@@ -191,6 +193,7 @@ public class App implements ActionListener{
             {
               myBox2.removeAllItems();
               myBox2.setModel(new JComboBox(questionsLoops.toArray()).getModel());
+              whichArray = "qL";
               panel.revalidate();
               panel.repaint();
               frame.repaint();
@@ -199,15 +202,37 @@ public class App implements ActionListener{
             {
               myBox2.removeAllItems();
               myBox2.setModel(new JComboBox(questionsRandom.toArray()).getModel());
+              whichArray = "qR";
               panel.revalidate();
               panel.repaint();
               frame.repaint();
+              
             }
             
         }
         else if (e.getSource() == viewQButton)
-        {
-
+        {   
+            System.out.println(whichArray);
+            if (whichArray.equals("qA"))
+            {
+                questionsArrays.remove(questionsArrays.indexOf((int)myBox2.getSelectedItem()));
+            }
+            else if (whichArray.equals("qI"))
+            {
+                questionsInheritance.remove(questionsInheritance.indexOf((int)myBox2.getSelectedItem()));
+            } 
+            else if (whichArray.equals("qC"))
+            {
+                questionsCond.remove(questionsCond.indexOf((int)myBox2.getSelectedItem()));
+            }
+            else if (whichArray.equals("qL"))
+            {
+                questionsLoops.remove(questionsLoops.indexOf((int)myBox2.getSelectedItem()));
+            }
+            else 
+            {
+                questionsRandom.remove(questionsRandom.indexOf((int)myBox2.getSelectedItem()));
+            }
             switchPanels("qs");
         }
         else if (e.getSource() == viewAButton)
@@ -221,6 +246,10 @@ public class App implements ActionListener{
         panel.removeAll();
         if (whichScreen.equals("gs"))
         {
+            if (questionsArrays.isEmpty() && questionsLoops.isEmpty() && questionsRandom.isEmpty() && questionsInheritance.isEmpty() && questionsCond.isEmpty())
+            {
+                switchPanels("go");
+            }
             myBox1.removeAllItems();
             myBox1.setModel(new JComboBox(questionTypes.toArray()).getModel());
             panel.add(myBox2);
@@ -251,6 +280,7 @@ public class App implements ActionListener{
         }
         else if (whichScreen.equals("qs"))
         {
+          
             setQuestions(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
             teamsDisplay.setText(teamString);
             panel.add(viewAButton);
@@ -279,12 +309,261 @@ public class App implements ActionListener{
             panel.repaint();
             frame.repaint();
         }
+        else if (whichScreen.equals("go"))
+        {
+            
+        }
         
     }
 
 
-    public void setQuestions(String questionCat, int pointVal)
+    public void setAnswers(String questionCat, int pointVal)
     {
+        if (questionCat.equals("Arrays, ArrayLists, and 2D Arrays"))
+        {
+            if (pointVal == 100)
+            {           
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays100A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            
+            }
+            else if (pointVal == 200)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays200A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 300)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays300A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 400)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays400A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 500)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays500A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+
+        }
+        else if (questionCat.equals("Conditionals"))
+        {
+            if (pointVal == 100)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals100A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 200)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals200A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 300)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals300A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 400)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals400A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 500)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals500A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+        }
+        else if (questionCat.equals("Inheritance"))
+        {
+            if (pointVal == 100)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance100A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 200)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance200A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 300)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance300A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 400)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance400A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 500)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance500A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+        }
+        else if (questionCat.equals("Loops"))
+        {
+            if (pointVal == 100)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance100A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 200)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance200A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 300)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance300A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 400)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance400A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 500)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance500A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+        }
+        else if (questionCat.equals("Random"))
+        {
+            if (pointVal == 100)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Random100A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 200)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Random200A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 300)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Random300A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 400)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Random400A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+            else if (pointVal == 500)
+            {
+                ImageIcon icon = new ImageIcon("src/Pics/Random500A.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
+            }
+        }
+    }
+
+    public void setQuestions(String questionCat, int pointVal) {
         if (questionCat.equals("Arrays, ArrayLists, and 2D Arrays"))
         {
             if (pointVal == 100)
@@ -527,9 +806,6 @@ public class App implements ActionListener{
                 frame.repaint();
             }
         }
-    }
-
-    public void setAnswers(String questionCat, int pointVal) {
 
     }
 
