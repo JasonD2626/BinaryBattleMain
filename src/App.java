@@ -1,17 +1,28 @@
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.desktop.QuitStrategy;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.ComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException; 
 
 public class App implements ActionListener{
 
@@ -19,6 +30,7 @@ public class App implements ActionListener{
     public static JFrame frame = new JFrame();
     public static JLabel title = new JLabel("BinaryBattle");
     public static String teamString = "Team 1: ";
+    public static JLabel questionAndAnswer = new JLabel("", SwingConstants.CENTER);
     public static JLabel teams = new JLabel("How many teams?");
     public static ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     public static ArrayList<String> questionTypes = new ArrayList<>(Arrays.asList("Arrays, ArrayLists, and 2D Arrays", "Conditionals", "Inheritance", "Loops", "Random"));
@@ -50,7 +62,7 @@ public class App implements ActionListener{
                 
         
         frame.setResizable(false);  
-        frame.setSize(1300, 600);
+        frame.setSize(1300, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 
@@ -61,10 +73,8 @@ public class App implements ActionListener{
         title.setFont(new Font("Calibri", Font.BOLD, 70));
         panel.add(title);
 
-        
-        
        
-        
+  
         
         teams.setBounds(570, -100, 8000, 600);
         teams.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -81,8 +91,8 @@ public class App implements ActionListener{
         question.setFont(new Font("Calibri", Font.BOLD, 30));
 
                         
-        teamsDisplay.setBounds(400, 210, 8000, 600);
-        teamsDisplay.setFont(new Font("Calibri", Font.BOLD, 15));
+        teamsDisplay.setBounds(170, 510, 8000, 600);
+        teamsDisplay.setFont(new Font("Calibri", Font.BOLD, 30));
 
         
 
@@ -118,6 +128,7 @@ public class App implements ActionListener{
 
         
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -242,24 +253,49 @@ public class App implements ActionListener{
         if (questionCat.equals("Arrays, ArrayLists, and 2D Arrays"))
         {
             if (pointVal == 100)
-            {
-
+            {           
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays100Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 200)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays200Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 300)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays300Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 400)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays400Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 500)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays500Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
 
         }
@@ -267,92 +303,192 @@ public class App implements ActionListener{
         {
             if (pointVal == 100)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals100Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 200)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals200Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 300)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals300Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 400)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals400Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 500)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Conditionals500Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
         }
         else if (questionCat.equals("Inheritance"))
         {
             if (pointVal == 100)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance100Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 200)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance200Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 300)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance300Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 400)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance400Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 500)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance500Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
         }
         else if (questionCat.equals("Loops"))
         {
             if (pointVal == 100)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance100Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 200)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance200Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 300)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance300Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 400)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance400Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 500)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Inheritance500Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
         }
         else if (questionCat.equals("Random"))
         {
             if (pointVal == 100)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Random100Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 200)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Random200Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 300)
             {
-
+                ImageIcon icon = new ImageIcon("src/Pics/Random300Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 400)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Random400Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
             else if (pointVal == 500)
             {
-                
+                ImageIcon icon = new ImageIcon("src/Pics/Random500Q.png");
+                questionAndAnswer.setBounds(0, -30, 1300, 900);
+                questionAndAnswer.setIcon(icon);
+                panel.add(questionAndAnswer);
+                panel.repaint();
+                frame.repaint();
             }
         }
     }
