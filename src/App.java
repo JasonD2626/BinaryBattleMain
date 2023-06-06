@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -21,18 +22,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.util.Collections;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException; 
+import java.io.IOException;
+import java.nio.channels.ShutdownChannelGroupException; 
 
 public class App implements ActionListener{
 
     public static JPanel panel = new JPanel();
     public static JFrame frame = new JFrame();
     public static JLabel title = new JLabel("BinaryBattle");
-    public static String teamString = "Team 1: ";
+    public static JLabel finalScoreLabel = new JLabel("Final score...");
+    public static String teamString = "";
+    public static boolean arrayRemoved, condRemoved, inherRemoved, loopsRemoved, randRemoved; 
     public static JLabel questionAndAnswer = new JLabel("", SwingConstants.CENTER);
     public static JLabel teams = new JLabel("How many teams?");
     public static ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -53,6 +58,8 @@ public class App implements ActionListener{
     public static JButton categoryOKButton = new JButton("Select");
     public static JButton viewQButton = new JButton("View Question");
     public static JButton viewAButton = new JButton("View Answer");
+    public static JButton givePointsButton = new JButton("Give Points");
+    public static JButton wrongAnswerButton =  new JButton("Wrong Answer");
     public static JLabel selectTeam = new JLabel("Which team?: ");
     public static JLabel questionType = new JLabel("Select question category: ");
     public static JLabel question = new JLabel("Select point value: ");
@@ -69,14 +76,15 @@ public class App implements ActionListener{
         frame.setResizable(false);  
         frame.setSize(1300, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-
         panel.setLayout(null);
 
         
         title.setBounds(480, -200, 8000, 600);
         title.setFont(new Font("Calibri", Font.BOLD, 70));
         panel.add(title);
+
+        finalScoreLabel.setBounds(480, -200, 8000, 600);
+        finalScoreLabel.setFont(new Font("Calibri", Font.BOLD, 70));
 
        
   
@@ -96,7 +104,7 @@ public class App implements ActionListener{
         question.setFont(new Font("Calibri", Font.BOLD, 30));
 
                         
-        teamsDisplay.setBounds(170, 510, 8000, 600);
+        teamsDisplay.setBounds(170, 450, 8000, 600);
         teamsDisplay.setFont(new Font("Calibri", Font.BOLD, 30));
 
         
@@ -119,8 +127,15 @@ public class App implements ActionListener{
         viewQButton.setBounds(580, 480, 130, 50);
         viewQButton.addActionListener(new App());
 
-        viewAButton.setBounds(580, 0, 2000, 600); //change bounds 
+        viewAButton.setBounds(560, 800, 200, 70); //change bounds 
         viewAButton.addActionListener(new App());
+
+        givePointsButton.setBounds(560, 800, 200, 70);
+        givePointsButton.addActionListener(new App());
+
+        wrongAnswerButton.setBounds(560, 900, 200, 35);
+        wrongAnswerButton.addActionListener(new App());
+
 
         
         playButton.setBounds(550, 350, 200, 100);
@@ -151,7 +166,12 @@ public class App implements ActionListener{
 
             for (int i = 1; i <= (int)myBox1.getSelectedItem(); i++)
             {
-                teamScores.add(0);
+                teamScores.add(0    );
+            }
+
+            for (int i = 0; i < teamsList.size(); i++)
+            {
+                    teamString += " " + teamsList.get(i) + ": " + teamScores.get(i) + " || ";
             }
 
             
@@ -212,7 +232,7 @@ public class App implements ActionListener{
         }
         else if (e.getSource() == viewQButton)
         {   
-            System.out.println(whichArray);
+            System.out.println(questionsArrays.indexOf((int)myBox2.getSelectedItem()));
             if (whichArray.equals("qA"))
             {
                 questionsArrays.remove(questionsArrays.indexOf((int)myBox2.getSelectedItem()));
@@ -239,72 +259,108 @@ public class App implements ActionListener{
         {
             switchPanels("as");
         }
-    }
-
-    public void switchPanels(String whichScreen)
-    {
-        panel.removeAll();
-        if (whichScreen.equals("gs"))
+        else if (e.getSource() == givePointsButton)
         {
-            if (questionsArrays.isEmpty() && questionsLoops.isEmpty() && questionsRandom.isEmpty() && questionsInheritance.isEmpty() && questionsCond.isEmpty())
-            {
-                switchPanels("go");
-            }
-            myBox1.removeAllItems();
-            myBox1.setModel(new JComboBox(questionTypes.toArray()).getModel());
-            panel.add(myBox2);
-            panel.add(myBox1);
-            panel.add(myBox3);
-            panel.add(selectTeam);
-            panel.add(categoryOKButton);
-            panel.add(questionType);
-            panel.add(viewQButton);
-            panel.add(question);
-            panel.add(teamsDisplay);
+            teamScores.set(teamsList.indexOf((String)myBox3.getSelectedItem()), teamScores.get(teamsList.indexOf((String)myBox3.getSelectedItem())) + (int)myBox2.getSelectedItem());
+            teamString = "";
             for (int i = 0; i < teamsList.size(); i++)
             {
-                if (i == 0)
-                {
-                    teamString += teamScores.get(i) + " || ";
-                }
-                else if (i > 0 && teamsList.size() > 1)
-                {
                     teamString += " " + teamsList.get(i) + ": " + teamScores.get(i) + " || ";
-                }
             }
             panel.revalidate();
             panel.repaint();
             frame.repaint();
+            switchPanels("gs");
+        }
+        else if (e.getSource() == wrongAnswerButton)
+        {
+            switchPanels("gs");
+        }
+    }
 
+    public void switchPanels(String whichScreen)
+    {
+      
+
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+        frame.repaint();
+        if (whichScreen.equals("gs"))
+        {
+          
+            
+            
+            if (questionsArrays.isEmpty() && questionsLoops.isEmpty() && questionsRandom.isEmpty() && questionsInheritance.isEmpty() && questionsCond.isEmpty())
+            {
+                switchPanels("go");
+            }
+            else
+            {
+                if (questionsArrays.isEmpty() && !arrayRemoved)
+                {
+                    questionTypes.remove(questionTypes.indexOf("Arrays, ArrayLists, and 2D Arrays"));
+                    arrayRemoved = true;
+                }
+                if (questionsCond.isEmpty() && !condRemoved)
+                {
+                    questionTypes.remove(questionTypes.indexOf("Conditionals"));
+                    condRemoved = true;
+                }
+                if (questionsInheritance.isEmpty() && !inherRemoved)
+                {
+                    questionTypes.remove(questionTypes.indexOf("Inheritance"));
+                    inherRemoved = true;
+                }
+                if (questionsLoops.isEmpty() && !loopsRemoved)
+                {
+                    questionTypes.remove(questionTypes.indexOf("Loops"));
+                    loopsRemoved = true;
+                }
+                if (questionsRandom.isEmpty() && !randRemoved)
+                {
+                    questionTypes.remove(questionTypes.indexOf("Random"));
+                    randRemoved = true; 
+                }
+                myBox1.removeAllItems();
+                myBox1.setModel(new JComboBox(questionTypes.toArray()).getModel());
+                panel.add(myBox2);
+                panel.add(myBox1);
+                panel.add(myBox3);
+                panel.add(selectTeam);
+                panel.add(categoryOKButton);
+                panel.add(questionType);
+                panel.add(viewQButton);
+                panel.add(question);
+                panel.add(teamsDisplay);
+                teamsDisplay.setText(teamString);
+                panel.repaint();
+                frame.repaint();
+                panel.revalidate();
+                panel.repaint();
+                frame.repaint();
+            }
     
         }
         else if (whichScreen.equals("qs"))
         {
-          
             setQuestions(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
             teamsDisplay.setText(teamString);
             panel.add(viewAButton);
             panel.repaint();
             frame.repaint();
             panel.add(teamsDisplay);
-            for (int i = 0; i < teamsList.size(); i++)
-            {
-                if (i == 0)
-                {
-                    teamString += teamScores.get(i) + " || ";
-                }
-                else if (i > 0 && teamsList.size() > 1)
-                {
-                    teamString += " " + teamsList.get(i) + ": " + teamScores.get(i) + " || ";
-                }
-            }
             panel.revalidate();
             panel.repaint();
             frame.repaint();
         }
         else if (whichScreen.equals("as"))
         {
+            panel.add(teamsDisplay);
+            panel.add(givePointsButton);
+            panel.add(wrongAnswerButton);
             setAnswers(((String)myBox1.getSelectedItem()), ((int)myBox2.getSelectedItem()));
+            panel.add(teamsDisplay);
             panel.revalidate();
             panel.repaint();
             frame.repaint();
@@ -312,6 +368,8 @@ public class App implements ActionListener{
         else if (whichScreen.equals("go"))
         {
             
+            panel.add(finalScoreLabel);
+            panel.add(teamsDisplay);
         }
         
     }
@@ -319,6 +377,7 @@ public class App implements ActionListener{
 
     public void setAnswers(String questionCat, int pointVal)
     {
+      
         if (questionCat.equals("Arrays, ArrayLists, and 2D Arrays"))
         {
             if (pointVal == 100)
@@ -421,7 +480,7 @@ public class App implements ActionListener{
         {
             if (pointVal == 100)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance100A.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Inhertiance100A.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -469,7 +528,7 @@ public class App implements ActionListener{
         {
             if (pointVal == 100)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance100A.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops100A.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -478,7 +537,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 200)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance200A.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops200A.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -487,7 +546,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 300)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance300A.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops300A.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -496,7 +555,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 400)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance400A.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops400A.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -505,7 +564,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 500)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance500A.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops500A.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -596,7 +655,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 400)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Arrays400Q.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Arrays400Q .png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -714,7 +773,7 @@ public class App implements ActionListener{
         {
             if (pointVal == 100)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance100Q.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops100Q.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -723,7 +782,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 200)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance200Q.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops200Q.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -732,7 +791,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 300)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance300Q.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops300Q.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
@@ -750,7 +809,7 @@ public class App implements ActionListener{
             }
             else if (pointVal == 500)
             {
-                ImageIcon icon = new ImageIcon("src/Pics/Inheritance500Q.png");
+                ImageIcon icon = new ImageIcon("src/Pics/Loops500Q.png");
                 questionAndAnswer.setBounds(0, -30, 1300, 900);
                 questionAndAnswer.setIcon(icon);
                 panel.add(questionAndAnswer);
