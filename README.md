@@ -10,6 +10,9 @@ Enjoy playing!
 **Question Select**
 ![image](https://github.com/JasonD2626/BinaryBattleMain/assets/107736333/bba5f4a1-8d19-4c1a-acaa-808beae703f8)
 
+**Question Display**
+![image](https://github.com/JasonD2626/BinaryBattleMain/assets/107736333/fbde25d5-d975-4b77-9135-ede41842d81d)
+
 **Answer Display**
 ![image](https://github.com/JasonD2626/BinaryBattleMain/assets/107736333/04cdc92a-9473-4be9-9a73-205495770892)
 
