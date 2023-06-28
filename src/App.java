@@ -293,6 +293,7 @@ public class App implements ActionListener{
             
             if (questionsArrays.isEmpty() && questionsLoops.isEmpty() && questionsRandom.isEmpty() && questionsInheritance.isEmpty() && questionsCond.isEmpty())
             {
+                System.out.println(teamString);
                 switchPanels("go");
             }
             else
@@ -367,7 +368,7 @@ public class App implements ActionListener{
         }
         else if (whichScreen.equals("go"))
         {
-            
+            teamsDisplay.setText(teamString);
             panel.add(finalScoreLabel);
             panel.add(teamsDisplay);
         }
